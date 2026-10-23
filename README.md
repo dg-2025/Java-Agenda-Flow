@@ -24,6 +24,7 @@
 4. [Requisitos Não Funcionais](#4-requisitos-não-funcionais)
 5. [Regras de Negócio](#5-regras-de-negócio)
 6. [Projeto e Arquitetura do Software](#6-projeto-e-arquitetura-do-software)
+   - [6.2.1 Diagramas UML (Classes, Sequência e Comunicação)](#621-diagramas-uml-do-sistema)
 7. [Plano e Casos de Teste](#7-plano-e-casos-de-teste)
 8. [Matriz de Rastreabilidade](#8-matriz-de-rastreabilidade-requisitos-x-testes-x-código-fonte)
 9. [Glossário](#9-glossário)
@@ -468,6 +469,149 @@ flowchart TD
     C --> D[Camada de Domínio - entidades e validações]
     C --> E[Camada de Persistência - Spring Data JPA / Repositories]
     E --> F[(Banco de Dados Relacional)]
+```
+
+### 6.2.1 Diagramas UML do Sistema
+
+#### Diagrama de Classes
+```mermaid
+classDiagram
+    direction TB
+
+    class Usuario {
+        <<abstract>>
+        #int id
+        #String nome
+        #String email
+        #String senha
+        +getId() int
+        +getNome() String
+        +getEmail() String
+    }
+
+    class Cliente {
+        +fazerAgendamento(Servico, Profissional, LocalDate, LocalTime) Agendamento
+    }
+
+    class Administrador {
+        +cadastrarServico(Servico) void
+        +cadastrarProfissional(Profissional) void
+        +alterarStatusAgendamento(Agendamento, StatusAgendamento) void
+    }
+
+    class Profissional {
+        -int id
+        -String nome
+        -boolean ativo
+        -HashSet~Servico~ servicos
+        -HashSet~HorarioTrabalho~ horarios
+        +adicionarServico(Servico) void
+        +removerServico(Servico) void
+        +adicionarHorario(HorarioTrabalho) void
+        +atendeServico(Servico) boolean
+    }
+
+    class Servico {
+        -int id
+        -String nome
+        -String descricao
+        -int duracaoMinutos
+        -float valor
+        -boolean ativo
+        +getDuracaoMinutos() int
+        +getValor() float
+    }
+
+    class HorarioTrabalho {
+        -int diaSemana
+        -LocalTime horaInicio
+        -LocalTime horaFim
+        +isDentroDoHorario(LocalTime, int) boolean
+    }
+
+    class Agendamento {
+        -int id
+        -LocalDate data
+        -LocalTime horaInicio
+        -LocalTime horaFim
+        -StatusAgendamento status
+        -Cliente cliente
+        -Profissional profissional
+        -Servico servico
+        +cancelar() void
+        +concluir() void
+        +conflitaCom(Agendamento) boolean
+    }
+
+    class StatusAgendamento {
+        <<enumeration>>
+        AGENDADO
+        CONCLUIDO
+        CANCELADO
+        FALTA
+    }
+
+    Usuario <|-- Cliente
+    Usuario <|-- Administrador
+
+    Cliente "1" --> "0..*" Agendamento : solicita
+    Profissional "1" --> "0..*" Agendamento : realiza
+    Servico "1" <-- "0..*" Agendamento : composto por
+    Agendamento --> StatusAgendamento : possui
+
+    Profissional "0..*" o-- "1..*" Servico : habilitado em
+    Profissional "1" *-- "1..*" HorarioTrabalho : cumpre
+```
+
+#### Diagrama de Sequência (Criação de Agendamento)
+```mermaid
+sequenceDiagram
+    autonumber
+    actor C as Cliente
+    participant SIS as SistemaAgendamento
+    participant P as Profissional
+    participant S as Servico
+    participant A as Agendamento
+
+    C->>SIS: solicitarAgendamento(servico, profissional, data, horaInicio)
+    activate SIS
+    
+    SIS->>P: atendeServico(servico)
+    activate P
+    P-->>SIS: true
+    deactivate P
+
+    SIS->>P: verificarDisponibilidade(data, horaInicio, servico.getDuracao())
+    activate P
+    P-->>SIS: disponivel (true)
+    deactivate P
+
+    SIS->>A: new Agendamento(cliente, profissional, servico, data, horaInicio)
+    activate A
+    A->>A: calcularHoraFim(servico.getDuracao())
+    A->>A: setStatus(AGENDADO)
+    A-->>SIS: instanciaAgendamento
+    deactivate A
+
+    SIS->>SIS: registrarNaLista(instanciaAgendamento)
+    SIS-->>C: confirmacaoSucesso(dadosAgendamento)
+    deactivate SIS
+```
+
+#### Diagrama de Comunicação / Colaboração
+```mermaid
+flowchart LR
+    C[":Cliente"]
+    SIS[":SistemaAgendamento"]
+    P[":Profissional"]
+    S[":Servico"]
+    A[":Agendamento"]
+
+    C -- "1: solicitarAgendamento(servico, prof, data, hora)" --> SIS
+    SIS -- "1.1: atendeServico(servico)" --> P
+    SIS -- "1.2: getDuracaoMinutos()" --> S
+    SIS -- "1.3: verificarDisponibilidade(data, hora, duracao)" --> P
+    SIS -- "1.4: create(cliente, prof, servico, data, hora)" --> A
 ```
 
 ### 6.3 Componentes / Módulos
