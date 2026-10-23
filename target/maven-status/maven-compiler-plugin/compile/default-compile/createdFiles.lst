@@ -1,0 +1,9 @@
+br\com\fatec\agenda_flow\Profissional.class
+br\com\fatec\agenda_flow\Administrador.class
+br\com\fatec\agenda_flow\Agendamento.class
+br\com\fatec\agenda_flow\HorarioTrabalho.class
+br\com\fatec\agenda_flow\Principal.class
+br\com\fatec\agenda_flow\StatusAgendamento.class
+br\com\fatec\agenda_flow\Cliente.class
+br\com\fatec\agenda_flow\Servico.class
+br\com\fatec\agenda_flow\Usuario.class
