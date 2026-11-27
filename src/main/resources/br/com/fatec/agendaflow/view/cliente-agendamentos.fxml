@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- RF-12 e RF-13 -->
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="br.com.fatec.agendaflow.controller.ClienteAgendamentosController"
+      styleClass="vidro" spacing="16">
+    <padding><Insets top="26" right="30" bottom="22" left="30"/></padding>
+
+    <VBox spacing="2">
+        <Label text="Meus agendamentos" styleClass="titulo-grande"/>
+        <Label fx:id="resumo" styleClass="texto-suave"/>
+    </VBox>
+
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+        <VBox fx:id="lista" spacing="10">
+            <padding><Insets top="2" right="8" bottom="10" left="0"/></padding>
+        </VBox>
+    </ScrollPane>
+</VBox>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="br.com.fatec.agendaflow.controller.CadastroController">
+    <padding><Insets top="16" right="24" bottom="28" left="24"/></padding>
+
+    <VBox fx:id="painel" styleClass="vidro, painel-login" prefWidth="460" maxWidth="460" maxHeight="-Infinity">
+        <Button styleClass="link" text="‹  Voltar para o login" onAction="#voltar"/>
+        <Label text="Criar conta" styleClass="titulo-grande"/>
+        <Label text="Leva menos de um minuto." styleClass="texto-suave"/>
+
+        <VBox spacing="6">
+            <Label text="Nome" styleClass="rotulo"/>
+            <TextField fx:id="campoNome" promptText="Como podemos te chamar?"/>
+        </VBox>
+        <VBox spacing="6">
+            <Label text="E-mail" styleClass="rotulo"/>
+            <TextField fx:id="campoEmail" promptText="voce@email.com"/>
+        </VBox>
+        <HBox spacing="12">
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Senha" styleClass="rotulo"/>
+                <PasswordField fx:id="campoSenha" promptText="8+ letras e números"/>
+            </VBox>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Confirmar senha" styleClass="rotulo"/>
+                <PasswordField fx:id="campoConfirmacao" promptText="Repita a senha" onAction="#cadastrar"/>
+            </VBox>
+        </HBox>
+        <Label fx:id="dicaSenha" styleClass="texto-apagado" text="Mínimo de 8 caracteres, com letras e números."/>
+
+        <!-- RNF-L01 e RNF-L02 (LGPD): finalidade e dados mínimos -->
+        <HBox fx:id="caixaLgpd" styleClass="caixa-lgpd" spacing="12">
+            <Label wrapText="true" HBox.hgrow="ALWAYS" styleClass="texto-suave"
+                   text="Pedimos só nome, e-mail e senha. Eles servem apenas para você entrar no sistema e para identificar os seus agendamentos. Você pode excluir a sua conta quando quiser, em Minha conta."/>
+        </HBox>
+
+        <Button text="Criar minha conta" styleClass="botao-primario" maxWidth="Infinity" onAction="#cadastrar" defaultButton="true"/>
+    </VBox>
+</StackPane>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- Área do administrador (RN-09 / RNF-05: só abre para papel ADMIN) -->
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="br.com.fatec.agendaflow.controller.AdminController" spacing="18">
+    <padding><Insets top="14" right="18" bottom="18" left="18"/></padding>
+
+    <VBox fx:id="menu" styleClass="vidro, menu-lateral" prefWidth="238" minWidth="238" maxWidth="238">
+        <HBox fx:id="marca" spacing="12" alignment="CENTER_LEFT">
+            <VBox>
+                <Label text="Agenda Flow" styleClass="menu-titulo"/>
+                <Label text="Administração" styleClass="menu-sub"/>
+            </VBox>
+        </HBox>
+        <Region minHeight="18"/>
+        <ToggleButton fx:id="menuAgenda" text="Agendamentos" styleClass="menu-item" maxWidth="Infinity" onAction="#mostrarAgenda"/>
+        <ToggleButton fx:id="menuServicos" text="Serviços" styleClass="menu-item" maxWidth="Infinity" onAction="#mostrarServicos"/>
+        <ToggleButton fx:id="menuProfissionais" text="Profissionais" styleClass="menu-item" maxWidth="Infinity" onAction="#mostrarProfissionais"/>
+        <Region VBox.vgrow="ALWAYS"/>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="vidro-leve">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <StackPane styleClass="avatar"><Label fx:id="iniciais"/></StackPane>
+            <VBox HBox.hgrow="ALWAYS" minWidth="0">
+                <Label fx:id="nomeUsuario" styleClass="subtitulo"/>
+                <Label fx:id="emailUsuario" styleClass="texto-apagado"/>
+            </VBox>
+        </HBox>
+        <Button fx:id="botaoSair" text="Sair" styleClass="menu-item" maxWidth="Infinity" onAction="#sair"/>
+    </VBox>
+
+    <StackPane HBox.hgrow="ALWAYS">
+        <fx:include fx:id="paginaAgenda" source="admin-agenda.fxml"/>
+        <fx:include fx:id="paginaServicos" source="admin-servicos.fxml"/>
+        <fx:include fx:id="paginaProfissionais" source="admin-profissionais.fxml"/>
+    </StackPane>
+</HBox>

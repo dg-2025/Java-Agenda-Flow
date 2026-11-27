@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="br.com.fatec.agendaflow.controller.LoginController"
+      alignment="CENTER" spacing="72">
+    <padding><Insets top="24" right="56" bottom="40" left="56"/></padding>
+
+    <!-- marca -->
+    <VBox spacing="18" alignment="CENTER_LEFT" maxWidth="460" HBox.hgrow="SOMETIMES">
+        <StackPane fx:id="logo" alignment="CENTER_LEFT"/>
+        <Label text="SALÃO · BARBEARIA · ESTÉTICA" styleClass="sobretitulo"/>
+        <Label text="Sua agenda flui sozinha." styleClass="titulo-xl" wrapText="true"/>
+        <Label styleClass="texto-suave" wrapText="true"
+               text="Escolha o serviço, o profissional e um horário livre. O Agenda Flow calcula a disponibilidade e nunca deixa dois atendimentos baterem."/>
+        <VBox fx:id="recursos" spacing="14">
+            <padding><Insets top="10"/></padding>
+        </VBox>
+    </VBox>
+
+    <!-- formulário -->
+    <VBox fx:id="painel" styleClass="vidro, painel-login" prefWidth="410" minWidth="380" maxWidth="410" maxHeight="-Infinity">
+        <Label text="Entrar" styleClass="titulo-grande"/>
+        <Label text="Use o seu e-mail e senha para continuar." styleClass="texto-suave"/>
+        <Region minHeight="4"/>
+        <VBox spacing="6">
+            <Label text="E-mail" styleClass="rotulo"/>
+            <TextField fx:id="campoEmail" promptText="voce@email.com"/>
+        </VBox>
+        <VBox spacing="6">
+            <Label text="Senha" styleClass="rotulo"/>
+            <PasswordField fx:id="campoSenha" promptText="Sua senha" onAction="#entrar"/>
+        </VBox>
+        <Region minHeight="2"/>
+        <Button fx:id="botaoEntrar" text="Entrar" styleClass="botao-primario" maxWidth="Infinity" onAction="#entrar" defaultButton="true"/>
+        <HBox alignment="CENTER" spacing="4">
+            <Label text="Ainda não tem conta?" styleClass="texto-suave"/>
+            <Button text="Criar conta" styleClass="link" onAction="#irParaCadastro"/>
+        </HBox>
+        <Region styleClass="separador"/>
+        <Label text="Contas de demonstração (clique para preencher)" styleClass="texto-apagado"/>
+        <FlowPane fx:id="contasDemo" hgap="8" vgap="8"/>
+    </VBox>
+</HBox>

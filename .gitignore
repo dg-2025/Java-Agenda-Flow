@@ -1,0 +1,13 @@
+target/
+bin/
+dist/
+*.db
+*.log
+nbactions.xml
+nb-configuration.xml
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/

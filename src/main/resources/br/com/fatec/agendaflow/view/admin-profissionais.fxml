@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- RF-04 (profissionais), RF-05 (vínculo com serviços) e RF-06 (horário de trabalho) -->
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="br.com.fatec.agendaflow.controller.AdminProfissionaisController"
+      styleClass="vidro" spacing="16">
+    <padding><Insets top="26" right="28" bottom="20" left="28"/></padding>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <VBox spacing="2" HBox.hgrow="ALWAYS">
+            <Label text="Profissionais" styleClass="titulo-grande"/>
+            <Label text="Quem atende, quais serviços faz e em que horários trabalha." styleClass="texto-suave"/>
+        </VBox>
+        <Button fx:id="botaoNovo" text="Novo profissional" styleClass="botao-primario" onAction="#novo"/>
+    </HBox>
+
+    <HBox spacing="18" VBox.vgrow="ALWAYS">
+        <ListView fx:id="lista" prefWidth="250" minWidth="230" maxWidth="270"/>
+
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+            <VBox fx:id="detalhe" spacing="14">
+                <padding><Insets right="8" bottom="8"/></padding>
+
+                <!-- dados -->
+                <VBox styleClass="vidro-leve" spacing="10">
+                    <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
+                    <Label fx:id="tituloDetalhe" text="Novo profissional" styleClass="titulo"/>
+                    <HBox spacing="10" alignment="BOTTOM_LEFT">
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Nome" styleClass="rotulo"/>
+                            <TextField fx:id="campoNome" promptText="Nome do profissional" onAction="#salvar"/>
+                        </VBox>
+                        <ToggleButton fx:id="campoAtivo" text="Ativo" styleClass="interruptor" selected="true"/>
+                        <Button text="Salvar" styleClass="botao-primario" onAction="#salvar"/>
+                    </HBox>
+                </VBox>
+
+                <!-- serviços (RF-05) -->
+                <VBox fx:id="blocoServicos" styleClass="vidro-leve" spacing="10">
+                    <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
+                    <Label text="Serviços que realiza" styleClass="subtitulo"/>
+                    <Label text="Marque e desmarque: a mudança vale na hora para os clientes." styleClass="texto-apagado"/>
+                    <FlowPane fx:id="servicos" hgap="16" vgap="10"/>
+                </VBox>
+
+                <!-- horários (RF-06) -->
+                <VBox fx:id="blocoHorarios" styleClass="vidro-leve" spacing="10">
+                    <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
+                    <Label text="Horário de trabalho semanal" styleClass="subtitulo"/>
+                    <Label text="Pode ter mais de um intervalo no mesmo dia (ex.: manhã e tarde), desde que não se sobreponham." styleClass="texto-apagado" wrapText="true"/>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <ComboBox fx:id="campoDia" prefWidth="150" promptText="Dia"/>
+                        <ComboBox fx:id="campoInicio" prefWidth="105" promptText="Início"/>
+                        <Label text="às" styleClass="texto-suave"/>
+                        <ComboBox fx:id="campoFim" prefWidth="105" promptText="Fim"/>
+                        <Button fx:id="botaoAdicionarHorario" text="Adicionar" onAction="#adicionarHorario"/>
+                    </HBox>
+                    <VBox fx:id="horarios" spacing="8"/>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </HBox>
+</VBox>

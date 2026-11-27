@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="br.com.fatec.agendaflow.controller.ClienteContaController"
+      styleClass="vidro" spacing="16">
+    <padding><Insets top="26" right="30" bottom="22" left="30"/></padding>
+
+    <Label text="Minha conta" styleClass="titulo-grande"/>
+
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+        <VBox spacing="16" maxWidth="680">
+            <padding><Insets right="8" bottom="10"/></padding>
+
+            <!-- dados (RNF-L02: só nome e e-mail) -->
+            <HBox styleClass="vidro-leve" spacing="16" alignment="CENTER_LEFT">
+                <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
+                <StackPane styleClass="avatar" minWidth="54" minHeight="54" maxWidth="54" maxHeight="54">
+                    <Label fx:id="iniciais" style="-fx-font-size: 18px;"/>
+                </StackPane>
+                <VBox spacing="3">
+                    <Label fx:id="nome" styleClass="titulo"/>
+                    <Label fx:id="email" styleClass="texto-suave"/>
+                </VBox>
+            </HBox>
+
+            <!-- fidelidade (RN-11, padrão Strategy) -->
+            <VBox fx:id="cartaoFidelidade" styleClass="vidro-leve" spacing="10">
+                <padding><Insets top="18" right="20" bottom="20" left="20"/></padding>
+                <HBox fx:id="cabecalhoFidelidade" spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Programa de fidelidade" styleClass="subtitulo"/>
+                </HBox>
+                <Label fx:id="textoFidelidade" styleClass="texto-suave" wrapText="true"/>
+                <StackPane alignment="CENTER_LEFT">
+                    <Region styleClass="barra-progresso-fundo" maxWidth="Infinity"/>
+                    <Region fx:id="barraFidelidade" styleClass="barra-progresso" maxWidth="0"/>
+                </StackPane>
+                <Label fx:id="regraPreco" styleClass="texto-apagado"/>
+            </VBox>
+
+            <!-- LGPD: exclusão de conta (RNF-L04) -->
+            <VBox styleClass="vidro-leve" spacing="10">
+                <padding><Insets top="18" right="20" bottom="20" left="20"/></padding>
+                <Label text="Privacidade" styleClass="subtitulo"/>
+                <Label styleClass="texto-suave" wrapText="true"
+                       text="Guardamos só o seu nome, e-mail e a senha protegida (hash BCrypt), usados para o login e para identificar os seus agendamentos. Ao excluir a conta, esses dados são apagados e os atendimentos em aberto são cancelados."/>
+                <HBox>
+                    <Button fx:id="botaoExcluir" text="Excluir minha conta" styleClass="botao-perigo" onAction="#excluirConta"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</VBox>
