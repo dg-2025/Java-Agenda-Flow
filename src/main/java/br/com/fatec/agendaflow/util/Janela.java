@@ -55,8 +55,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
- * Moldura de cada janela do app: fundo com foto, vidro fosco de verdade atrás
- * dos painéis ("liquid glass"), barra de título própria, avisos (toasts),
+ * Moldura de cada janela do app: fundo do tema dark, painéis translúcidos (com
+ * suporte a foto de fundo desfocada atrás deles, hoje desligado), barra de título própria, avisos (toasts),
  * diálogos e a navegação entre as telas FXML.
  * <p>
  * Cada janela tem o seu usuário logado. Dá para abrir uma segunda janela (botão
@@ -152,7 +152,7 @@ public class Janela {
         Rectangle2D tela = Screen.getPrimary().getVisualBounds();
         double largura = Math.min(1320, tela.getWidth() * 0.94);
         double altura = Math.min(840, tela.getHeight() * 0.94);
-        Scene cena = new Scene(raiz, largura, altura, Color.web("#0B0714"));
+        Scene cena = new Scene(raiz, largura, altura, Color.web("#0B0B10"));
         cena.getStylesheets().add(App.class.getResource("styles/app.css").toExternalForm());
         stage.setScene(cena);
         stage.setMinWidth(1020);

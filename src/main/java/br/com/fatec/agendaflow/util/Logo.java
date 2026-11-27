@@ -16,7 +16,7 @@ import javafx.scene.shape.StrokeLineJoin;
 public final class Logo {
 
     public static final LinearGradient GRADIENTE = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
-            new Stop(0, Color.web("#8B5CF6")), new Stop(0.55, Color.web("#EC4899")), new Stop(1, Color.web("#FB923C")));
+            new Stop(0, Color.web("#6D5CFF")), new Stop(1, Color.web("#00C2FF")));
 
     private Logo() {
     }

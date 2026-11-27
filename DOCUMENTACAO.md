@@ -553,7 +553,7 @@ flowchart LR
 
 Aplicação **desktop monolítica em camadas**, empacotada como um único executável. As camadas seguem uma regra de dependência de cima para baixo: cada uma só conhece a imediatamente abaixo.
 
-1. **Apresentação (View):** arquivos FXML + CSS (`resources/.../view` e `styles/app.css`). Visual "liquid glass" com vidro fosco de verdade atrás dos painéis.
+1. **Apresentação (View):** arquivos FXML + CSS (`resources/.../view` e `styles/app.css`). Tema dark com painéis translúcidos (fundo #0B0B10, superfícies #16161F/#1D1D28, destaque violeta #6D5CFF e ciano #00C2FF).
 2. **Controle (Controller):** controllers JavaFX (`controller/`) — recebem os eventos da tela, chamam os services e mostram o resultado. Não têm regra de negócio.
 3. **Serviço (Service):** regras de negócio (`service/`), permissões (RN-09), contexto do Strategy e disparo do Observer.
 4. **Domínio (Model):** entidades e regras próprias de cada objeto (`model/`), como `Agendamento.conflitaCom` e `Agendamento.alterarStatus` (RN-08).
@@ -582,7 +582,7 @@ flowchart TD
 | Componente | Responsabilidade | Tecnologia |
 |---|---|---|
 | Apresentação | Telas de login, cadastro, área do cliente (agendar, meus agendamentos, minha conta) e área do admin (agendamentos, serviços, profissionais) | JavaFX 23 + FXML + CSS |
-| Moldura da janela (`util/Janela`) | Barra de título própria, vidro fosco, navegação entre telas, avisos, diálogos, sessão da janela e inscrição de observadores | JavaFX |
+| Moldura da janela (`util/Janela`) | Barra de título própria, painéis translúcidos, navegação entre telas, avisos, diálogos, sessão da janela e inscrição de observadores | JavaFX |
 | Serviço de Usuário | Cadastro, autenticação e exclusão de conta | Java + jBCrypt |
 | Serviço de Catálogo | Serviços, profissionais e vínculos | Java |
 | Serviço de Agenda | Horário de trabalho e cálculo de disponibilidade | Java (`java.time`) |
@@ -604,7 +604,7 @@ flowchart TD
 | Build | Maven (+ `javafx-maven-plugin`, `maven-shade-plugin`) | 3.9+ |
 | Empacotamento | `jpackage` do JDK (executável `.exe` com Java embutido) | JDK 21 |
 | Testes | JUnit 5 (Jupiter, com `junit-jupiter-params`) | 5.10.2 |
-| Imagens | Fotos do Pixabay (fundo), logo e ícones vetoriais próprios | — |
+| Imagens | Logo e ícones vetoriais próprios (sem imagens de terceiros) | — |
 
 ### 6.6 Modelo de dados
 
@@ -1281,8 +1281,8 @@ Java-Agenda-Flow/
     │       ├── view/                     login, cadastro, cliente, cliente-agendar, cliente-agendamentos,
     │       │                             cliente-conta, admin, admin-agenda, admin-servicos,
     │       │                             admin-profissionais (.fxml)
-    │       ├── styles/app.css            visual "liquid glass"
-    │       └── img/                      fundo-login.jpg, fundo-app.jpg, icone.png
+    │       ├── styles/app.css            tema dark
+    │       └── img/                      icone.png
     └── test/java/br/com/fatec/agendaflow/
         ├── service/                      AgendaServiceTest, AgendamentoServiceTest, UsuarioServiceTest,
         │                                 CadastrosAdminTest, BancoDeTeste (base com @TempDir)
@@ -1296,7 +1296,7 @@ Java-Agenda-Flow/
 
 | Sistema externo | Finalidade | Protocolo | Observações |
 |---|---|---|---|
-| — | Nenhuma integração externa em tempo de execução | — | Fora de escopo (Seção 2.3). As fotos de fundo foram baixadas do Pixabay durante o desenvolvimento e vão dentro do executável. |
+| — | Nenhuma integração externa em tempo de execução | — | Fora de escopo (Seção 2.3). |
 
 ---
 
@@ -1437,7 +1437,7 @@ Java-Agenda-Flow/
 | Factory / Observer / Strategy | Padrões GoF usados no projeto (Seção 6.9). |
 | SQLite | Banco de dados relacional que funciona em um único arquivo, sem servidor. |
 | BCrypt | Algoritmo de hash de senha com "sal", lento de propósito para dificultar ataques. |
-| Liquid glass | Estilo visual com painéis translúcidos e o fundo desfocado atrás (vidro fosco). |
+| Tema dark | Estilo visual escuro com painéis translúcidos, seguindo os tokens de cor do nosso guia de interface. |
 | MVP | Minimum Viable Product — menor versão funcional e completa do sistema. |
 
 ---
@@ -1448,6 +1448,6 @@ Java-Agenda-Flow/
 - **Executável e prints das telas:** ver `README.md` do repositório.
 - **Script do banco:** `db/agendaflow.sql` (o aplicativo cria o mesmo esquema automaticamente).
 - **Histórico de eventos (Observer):** `%APPDATA%\AgendaFlow\historico.log`, gerado ao usar o sistema.
-- **Imagens:** fotos de fundo do Pixabay (IDs 5415669 e 3277314), sob a Licença de Conteúdo do Pixabay; logo, ícone e ícones de interface desenhados para o projeto.
+- **Imagens:** logo, ícone e ícones de interface desenhados para o projeto.
 - **Documentos de referência:** material da disciplina Engenharia de Software III (Fatec) — modelo de documentação "Versão 2 Final", unidades de arquitetura de software, mapeamento de diagramas para código (Unidades 8 e 9), padrões GoF em Java (Unidade 10) e testes de software com JUnit (Unidade 11); exemplos de JavaFX + FXML + DAO das aulas de programação.
 - **Critério de conclusão do MVP:** todos os Requisitos Funcionais da Seção 3 implementados, todas as Regras de Negócio da Seção 5 aplicadas e todos os Casos de Teste da Seção 7.3 com status "Aprovado" na Matriz de Rastreabilidade (Seção 8) — **atingido na versão 2.0**.

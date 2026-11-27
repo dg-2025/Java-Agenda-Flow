@@ -8,9 +8,9 @@
 </p>
 
 <p align="center">
-  <img alt="Java 21" src="https://img.shields.io/badge/Java-21-EC4899?style=for-the-badge&logo=openjdk&logoColor=white">
-  <img alt="JavaFX 23" src="https://img.shields.io/badge/JavaFX-23-8B5CF6?style=for-the-badge">
-  <img alt="SQLite" src="https://img.shields.io/badge/SQLite-embutido-FB923C?style=for-the-badge&logo=sqlite&logoColor=white">
+  <img alt="Java 21" src="https://img.shields.io/badge/Java-21-6D5CFF?style=for-the-badge&logo=openjdk&logoColor=white">
+  <img alt="JavaFX 23" src="https://img.shields.io/badge/JavaFX-23-6D5CFF?style=for-the-badge">
+  <img alt="SQLite" src="https://img.shields.io/badge/SQLite-embutido-00C2FF?style=for-the-badge&logo=sqlite&logoColor=white">
   <img alt="JUnit 5" src="https://img.shields.io/badge/JUnit_5-66_testes_passando-34D399?style=for-the-badge&logo=junit5&logoColor=white">
 </p>
 
@@ -57,7 +57,7 @@ Regras garantidas no código **e no banco**: nenhum profissional fica com dois a
 
 <table>
   <tr>
-    <td width="50%"><img src="assets/prints/01-login.jpg" alt="Login"><br><sub><b>Login</b> — vidro fosco de verdade sobre a foto</sub></td>
+    <td width="50%"><img src="assets/prints/01-login.jpg" alt="Login"><br><sub><b>Login</b> — tema dark</sub></td>
     <td width="50%"><img src="assets/prints/03-cliente-servicos.jpg" alt="Escolha do serviço"><br><sub><b>Passo 1</b> — serviços ativos</sub></td>
   </tr>
   <tr>
@@ -123,11 +123,11 @@ src/main/java/br/com/fatec/agendaflow
 ├── observer/       padrão Observer
 ├── strategy/       padrão Strategy
 ├── controller/     controllers das telas FXML
-└── util/           janela com vidro fosco, ícones, logo, formatação
+└── util/           janela (barra de título, avisos, diálogos), ícones, logo, formatação
 src/main/resources/br/com/fatec/agendaflow
 ├── view/           telas .fxml
-├── styles/app.css  visual "liquid glass"
-└── img/            fundos e ícone
+├── styles/app.css  tema dark (tokens do nosso Guia de UI)
+└── img/            ícone
 src/test/java       66 testes JUnit 5
 db/agendaflow.sql   script do banco (o app cria sozinho)
 ```
@@ -162,5 +162,5 @@ jpackage --type app-image --name AgendaFlow --input target --main-jar agenda-flo
 
 <p align="center">
   <img src="assets/logo.svg" width="56" alt="logo"><br>
-  <sub>Fotos de fundo: <a href="https://pixabay.com">Pixabay</a> (licença Pixabay). Ícones desenhados no estilo Lucide.</sub>
+  <sub>Logo e ícones desenhados para o projeto (ícones no estilo Lucide).</sub>
 </p>
