@@ -3,6 +3,7 @@ package br.com.fatec.agendaflow.controller;
 import br.com.fatec.agendaflow.Sistema;
 import br.com.fatec.agendaflow.model.Agendamento;
 import br.com.fatec.agendaflow.model.StatusAgendamento;
+import br.com.fatec.agendaflow.util.CalendarioMes;
 import br.com.fatec.agendaflow.util.Formatos;
 import br.com.fatec.agendaflow.util.Icones;
 import br.com.fatec.agendaflow.util.Janela;
@@ -19,6 +20,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -29,13 +34,74 @@ public class ClienteAgendamentosController {
 
     @FXML private Label resumo;
     @FXML private VBox lista;
+    @FXML private ScrollPane rolagemLista;
+    @FXML private ToggleButton modoLista;
+    @FXML private ToggleButton modoCalendario;
+    @FXML private HBox visaoCalendario;
+    @FXML private StackPane lugarCalendario;
+    @FXML private Label tituloDia;
+    @FXML private VBox painelDia;
 
     private Janela janela;
+    private final CalendarioMes calendario = new CalendarioMes(a -> a.getHoraInicio() + " " + a.getServicoNome());
     private final Set<Integer> canceladosPorMim = new HashSet<>();
 
     public void iniciar(Janela janela) {
         this.janela = janela;
+        lugarCalendario.getChildren().add(calendario);
+        calendario.setAoSelecionar(this::mostrarDia);
+        ToggleGroup modos = new ToggleGroup();
+        modoLista.setToggleGroup(modos);
+        modoCalendario.setToggleGroup(modos);
+        modos.selectedToggleProperty().addListener((o, antigo, novo) -> {
+            if (novo == null) {
+                antigo.setSelected(true);
+            }
+        });
+        modoLista.setSelected(true);
         recarregar();
+    }
+
+    @FXML
+    private void mostrarLista() {
+        rolagemLista.setVisible(true);
+        visaoCalendario.setVisible(false);
+    }
+
+    @FXML
+    private void mostrarCalendario() {
+        rolagemLista.setVisible(false);
+        visaoCalendario.setVisible(true);
+    }
+
+    private void mostrarDia(LocalDate dia) {
+        tituloDia.setText(Formatos.dataLonga(dia));
+        painelDia.getChildren().clear();
+        List<Agendamento> doDia = calendario.doDia(dia);
+        if (doDia.isEmpty()) {
+            Label l = new Label("Nada marcado neste dia.");
+            l.getStyleClass().add("texto-suave");
+            painelDia.getChildren().add(l);
+            return;
+        }
+        for (Agendamento a : doDia) {
+            Label hora = new Label(a.getHoraInicio() + " – " + a.getHoraFim());
+            hora.getStyleClass().add("subtitulo");
+            Region espaco = new Region();
+            HBox.setHgrow(espaco, Priority.ALWAYS);
+            HBox topo = new HBox(8, hora, espaco, status(a.getStatus()));
+            topo.setAlignment(Pos.CENTER_LEFT);
+            Label servico = new Label(a.getServicoNome());
+            Label detalhe = new Label("com " + a.getProfissionalNome() + " · " + Formatos.dinheiro(a.getValor()));
+            detalhe.getStyleClass().add("texto-suave");
+            VBox cartao = new VBox(6, topo, servico, detalhe);
+            cartao.getStyleClass().add("item-lista");
+            Button cancelar = botaoCancelar(a);
+            if (cancelar != null) {
+                cartao.getChildren().add(new HBox(cancelar));
+            }
+            painelDia.getChildren().add(cartao);
+        }
     }
 
     /** Usado pelo Observer da tela para não avisar o cliente do que ele mesmo fez. */
@@ -60,6 +126,9 @@ public class ClienteAgendamentosController {
             resumo.setText(proximos.isEmpty()
                     ? "Você não tem atendimentos marcados."
                     : proximos.size() == 1 ? "1 atendimento marcado." : proximos.size() + " atendimentos marcados.");
+
+            calendario.setAgendamentos(todos);
+            mostrarDia(calendario.getSelecionado());
 
             lista.getChildren().clear();
             if (todos.isEmpty()) {
@@ -100,7 +169,15 @@ public class ClienteAgendamentosController {
         HBox cartao = new HBox(bloco, textos, valor, status(a.getStatus()));
         cartao.getStyleClass().add("cartao-agendamento");
 
-        // RF-13 + RN-08: só dá para cancelar o que ainda está "Agendado"
+        Button cancelar = botaoCancelar(a);
+        if (cancelar != null) {
+            cartao.getChildren().add(cancelar);
+        }
+        return cartao;
+    }
+
+    /** RF-13 + RN-08: só dá para cancelar o que ainda está "Agendado". */
+    private Button botaoCancelar(Agendamento a) {
         if (a.getStatus() == StatusAgendamento.AGENDADO && !a.getData().isBefore(LocalDate.now())) {
             Button cancelar = new Button("Cancelar", Icones.criar("x", 14));
             cancelar.getStyleClass().addAll("botao-perigo", "botao-pequeno");
@@ -112,9 +189,9 @@ public class ClienteAgendamentosController {
                         Sistema.AGENDAMENTOS.cancelarPeloCliente(janela.getUsuario(), a.getId());
                         janela.aviso("Agendamento cancelado.", Janela.TipoAviso.SUCESSO);
                     }));
-            cartao.getChildren().add(cancelar);
+            return cancelar;
         }
-        return cartao;
+        return null;
     }
 
     static Label status(StatusAgendamento s) {

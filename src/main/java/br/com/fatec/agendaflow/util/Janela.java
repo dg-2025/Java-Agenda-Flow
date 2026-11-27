@@ -152,7 +152,7 @@ public class Janela {
         Rectangle2D tela = Screen.getPrimary().getVisualBounds();
         double largura = Math.min(1320, tela.getWidth() * 0.94);
         double altura = Math.min(840, tela.getHeight() * 0.94);
-        Scene cena = new Scene(raiz, largura, altura, Color.web("#0B0B10"));
+        Scene cena = new Scene(raiz, largura, altura, Color.web("#0A0C10"));
         cena.getStylesheets().add(App.class.getResource("styles/app.css").toExternalForm());
         stage.setScene(cena);
         stage.setMinWidth(1020);

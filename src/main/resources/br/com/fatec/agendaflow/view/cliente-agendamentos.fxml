@@ -3,22 +3,44 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<!-- RF-12 e RF-13 -->
+<!-- RF-12 e RF-13 (lista ou calendário) -->
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="br.com.fatec.agendaflow.controller.ClienteAgendamentosController"
       styleClass="vidro" spacing="16">
     <padding><Insets top="26" right="30" bottom="22" left="30"/></padding>
 
-    <VBox spacing="2">
-        <Label text="Meus agendamentos" styleClass="titulo-grande"/>
-        <Label fx:id="resumo" styleClass="texto-suave"/>
-    </VBox>
-
-    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
-        <VBox fx:id="lista" spacing="10">
-            <padding><Insets top="2" right="8" bottom="10" left="0"/></padding>
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <VBox spacing="2" HBox.hgrow="ALWAYS">
+            <Label text="Meus agendamentos" styleClass="titulo-grande"/>
+            <Label fx:id="resumo" styleClass="texto-suave"/>
         </VBox>
-    </ScrollPane>
+        <HBox styleClass="segmentado">
+            <ToggleButton fx:id="modoLista" text="Lista" styleClass="segmento" onAction="#mostrarLista"/>
+            <ToggleButton fx:id="modoCalendario" text="Calendário" styleClass="segmento" onAction="#mostrarCalendario"/>
+        </HBox>
+    </HBox>
+
+    <StackPane VBox.vgrow="ALWAYS">
+        <ScrollPane fx:id="rolagemLista" fitToWidth="true" hbarPolicy="NEVER">
+            <VBox fx:id="lista" spacing="10">
+                <padding><Insets top="2" right="8" bottom="10" left="0"/></padding>
+            </VBox>
+        </ScrollPane>
+
+        <HBox fx:id="visaoCalendario" spacing="16" visible="false">
+            <StackPane fx:id="lugarCalendario" HBox.hgrow="ALWAYS"/>
+            <VBox styleClass="vidro-leve" spacing="10" prefWidth="290" minWidth="270" maxWidth="310">
+                <padding><Insets top="16" right="14" bottom="14" left="14"/></padding>
+                <Label fx:id="tituloDia" styleClass="subtitulo"/>
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="painelDia" spacing="8"/>
+                </ScrollPane>
+            </VBox>
+        </HBox>
+    </StackPane>
 </VBox>

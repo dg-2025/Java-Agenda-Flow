@@ -165,9 +165,9 @@ Os itens abaixo **não fazem parte desta versão**:
 | RF-09 | O sistema deve calcular e exibir, para um profissional, serviço e data escolhidos, apenas os horários de início realmente disponíveis. | Alta | Autor do projeto | Implementado |
 | RF-10 | O sistema deve permitir que o cliente crie um agendamento somente após confirmar um resumo com serviço, profissional, data, horário e valor. | Alta | Autor do projeto | Implementado |
 | RF-11 | O sistema deve impedir a criação de um agendamento em um horário que já esteja ocupado, indisponível ou insuficiente para a duração do serviço. | Alta | Autor do projeto | Implementado |
-| RF-12 | O sistema deve listar os agendamentos do cliente autenticado, com seus respectivos status. | Alta | Autor do projeto | Implementado |
+| RF-12 | O sistema deve listar os agendamentos do cliente autenticado, com seus respectivos status, em lista ou em calendário mensal. | Alta | Autor do projeto | Implementado |
 | RF-13 | O sistema deve permitir que o cliente cancele um agendamento próprio enquanto o status for "Agendado". | Alta | Autor do projeto | Implementado |
-| RF-14 | O sistema deve permitir que o ADMIN liste todos os agendamentos do sistema, com filtro por data. | Alta | Autor do projeto | Implementado |
+| RF-14 | O sistema deve permitir que o ADMIN liste todos os agendamentos do sistema, com filtro por data, em lista ou em calendário mensal. | Alta | Autor do projeto | Implementado |
 | RF-15 | O sistema deve permitir que o ADMIN altere o status de um agendamento para "Concluído", "Cancelado" ou "Falta do cliente". | Alta | Autor do projeto | Implementado |
 
 ### 3.2 Detalhamento dos Requisitos Funcionais
@@ -553,7 +553,7 @@ flowchart LR
 
 Aplicação **desktop monolítica em camadas**, empacotada como um único executável. As camadas seguem uma regra de dependência de cima para baixo: cada uma só conhece a imediatamente abaixo.
 
-1. **Apresentação (View):** arquivos FXML + CSS (`resources/.../view` e `styles/app.css`). Tema dark com painéis translúcidos (fundo #0B0B10, superfícies #16161F/#1D1D28, destaque violeta #6D5CFF e ciano #00C2FF).
+1. **Apresentação (View):** arquivos FXML + CSS (`resources/.../view` e `styles/app.css`). Tema dark em grafite e azul com painéis translúcidos (fundo #0A0C10, superfícies #151A21/#1B222B, destaque azul #3B82F6 e ciano #00C2FF). Agendamentos podem ser vistos em lista ou em calendário mensal (`util/CalendarioMes`).
 2. **Controle (Controller):** controllers JavaFX (`controller/`) — recebem os eventos da tela, chamam os services e mostram o resultado. Não têm regra de negócio.
 3. **Serviço (Service):** regras de negócio (`service/`), permissões (RN-09), contexto do Strategy e disparo do Observer.
 4. **Domínio (Model):** entidades e regras próprias de cada objeto (`model/`), como `Agendamento.conflitaCom` e `Agendamento.alterarStatus` (RN-08).
@@ -583,6 +583,7 @@ flowchart TD
 |---|---|---|
 | Apresentação | Telas de login, cadastro, área do cliente (agendar, meus agendamentos, minha conta) e área do admin (agendamentos, serviços, profissionais) | JavaFX 23 + FXML + CSS |
 | Moldura da janela (`util/Janela`) | Barra de título própria, painéis translúcidos, navegação entre telas, avisos, diálogos, sessão da janela e inscrição de observadores | JavaFX |
+| Calendário do mês (`util/CalendarioMes`) | Grade mensal com os agendamentos de cada dia (cor por status) e seleção do dia; usado na área do cliente e do admin (RF-12, RF-14) | JavaFX |
 | Serviço de Usuário | Cadastro, autenticação e exclusão de conta | Java + jBCrypt |
 | Serviço de Catálogo | Serviços, profissionais e vínculos | Java |
 | Serviço de Agenda | Horário de trabalho e cálculo de disponibilidade | Java (`java.time`) |
@@ -1276,7 +1277,7 @@ Java-Agenda-Flow/
     │   │   │                             ClienteAgendarController, ClienteAgendamentosController,
     │   │   │                             ClienteContaController, AdminController, AdminAgendaController,
     │   │   │                             AdminServicosController, AdminProfissionaisController
-    │   │   └── util/                     Janela, Tela, Icones, Logo, Formatos, Senha
+    │   │   └── util/                     Janela, Tela, CalendarioMes, Icones, Logo, Formatos, Senha
     │   └── resources/br/com/fatec/agendaflow/
     │       ├── view/                     login, cadastro, cliente, cliente-agendar, cliente-agendamentos,
     │       │                             cliente-conta, admin, admin-agenda, admin-servicos,
@@ -1437,7 +1438,8 @@ Java-Agenda-Flow/
 | Factory / Observer / Strategy | Padrões GoF usados no projeto (Seção 6.9). |
 | SQLite | Banco de dados relacional que funciona em um único arquivo, sem servidor. |
 | BCrypt | Algoritmo de hash de senha com "sal", lento de propósito para dificultar ataques. |
-| Tema dark | Estilo visual escuro com painéis translúcidos, seguindo os tokens de cor do nosso guia de interface. |
+| Tema dark | Estilo visual escuro (grafite e azul) com painéis translúcidos. |
+| Calendário do mês | Visualização dos agendamentos em grade mensal; clicar no dia mostra os detalhes e as ações ao lado. |
 | MVP | Minimum Viable Product — menor versão funcional e completa do sistema. |
 
 ---

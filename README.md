@@ -8,8 +8,8 @@
 </p>
 
 <p align="center">
-  <img alt="Java 21" src="https://img.shields.io/badge/Java-21-6D5CFF?style=for-the-badge&logo=openjdk&logoColor=white">
-  <img alt="JavaFX 23" src="https://img.shields.io/badge/JavaFX-23-6D5CFF?style=for-the-badge">
+  <img alt="Java 21" src="https://img.shields.io/badge/Java-21-3B82F6?style=for-the-badge&logo=openjdk&logoColor=white">
+  <img alt="JavaFX 23" src="https://img.shields.io/badge/JavaFX-23-3B82F6?style=for-the-badge">
   <img alt="SQLite" src="https://img.shields.io/badge/SQLite-embutido-00C2FF?style=for-the-badge&logo=sqlite&logoColor=white">
   <img alt="JUnit 5" src="https://img.shields.io/badge/JUnit_5-66_testes_passando-34D399?style=for-the-badge&logo=junit5&logoColor=white">
 </p>
@@ -45,8 +45,8 @@ O Java e o banco de dados já vão **dentro** do executável. O banco (SQLite) n
 | Cria conta (com aviso de finalidade da LGPD) e entra | Cadastra, edita e ativa/inativa **serviços** |
 | Agenda em **4 passos**: serviço → profissional → dia/horário → confirmar | Cadastra **profissionais** e marca os serviços que cada um faz |
 | Só vê **horários realmente livres** (expediente, duração e agenda já ocupada) | Define o **horário de trabalho semanal** (vários intervalos por dia, sem sobreposição) |
-| Vê **resumo com valor** antes de confirmar e ganha **10% de desconto** a partir do 3º atendimento concluído | Vê **todos os agendamentos**, filtra por data |
-| Acompanha e **cancela** os próprios agendamentos | Marca **concluído**, **falta do cliente** ou **cancela** |
+| Vê **resumo com valor** antes de confirmar e ganha **10% de desconto** a partir do 3º atendimento concluído | Vê **todos os agendamentos** em lista (com filtro por data) ou em **calendário do mês** |
+| Acompanha e **cancela** os próprios agendamentos, em **lista ou calendário** | Marca **concluído**, **falta do cliente** ou **cancela** |
 | **Exclui a própria conta** (LGPD) | — |
 
 Regras garantidas no código **e no banco**: nenhum profissional fica com dois atendimentos sobrepostos (há até um *trigger* no SQLite como última barreira), cancelado libera o horário, status finalizado não muda mais e o cliente não acessa a área do admin.
@@ -57,7 +57,7 @@ Regras garantidas no código **e no banco**: nenhum profissional fica com dois a
 
 <table>
   <tr>
-    <td width="50%"><img src="assets/prints/01-login.jpg" alt="Login"><br><sub><b>Login</b> — tema dark</sub></td>
+    <td width="50%"><img src="assets/prints/01-login.jpg" alt="Login"><br><sub><b>Login</b> — tema dark (grafite + azul)</sub></td>
     <td width="50%"><img src="assets/prints/03-cliente-servicos.jpg" alt="Escolha do serviço"><br><sub><b>Passo 1</b> — serviços ativos</sub></td>
   </tr>
   <tr>
@@ -67,6 +67,10 @@ Regras garantidas no código **e no banco**: nenhum profissional fica com dois a
   <tr>
     <td><img src="assets/prints/07-cliente-agendamentos.jpg" alt="Meus agendamentos"><br><sub><b>Meus agendamentos</b> — próximos e histórico</sub></td>
     <td><img src="assets/prints/08-cliente-conta.jpg" alt="Minha conta"><br><sub><b>Minha conta</b> — fidelidade e privacidade</sub></td>
+  </tr>
+  <tr>
+    <td><img src="assets/prints/13-admin-calendario.jpg" alt="Admin: calendário"><br><sub><b>Admin</b> — calendário do mês com o painel do dia</sub></td>
+    <td><img src="assets/prints/12-cliente-calendario.jpg" alt="Cliente: calendário"><br><sub><b>Cliente</b> — meus agendamentos no calendário</sub></td>
   </tr>
   <tr>
     <td><img src="assets/prints/09-admin-agendamentos.jpg" alt="Admin: agendamentos"><br><sub><b>Admin</b> — todos os agendamentos e ações</sub></td>
@@ -123,10 +127,10 @@ src/main/java/br/com/fatec/agendaflow
 ├── observer/       padrão Observer
 ├── strategy/       padrão Strategy
 ├── controller/     controllers das telas FXML
-└── util/           janela (barra de título, avisos, diálogos), ícones, logo, formatação
+└── util/           janela (barra de título, avisos, diálogos), calendário do mês, ícones, logo, formatação
 src/main/resources/br/com/fatec/agendaflow
 ├── view/           telas .fxml
-├── styles/app.css  tema dark (tokens do nosso Guia de UI)
+├── styles/app.css  tema dark (grafite + azul)
 └── img/            ícone
 src/test/java       66 testes JUnit 5
 db/agendaflow.sql   script do banco (o app cria sozinho)

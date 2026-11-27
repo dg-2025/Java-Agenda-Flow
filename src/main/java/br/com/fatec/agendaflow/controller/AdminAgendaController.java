@@ -3,6 +3,7 @@ package br.com.fatec.agendaflow.controller;
 import br.com.fatec.agendaflow.Sistema;
 import br.com.fatec.agendaflow.model.Agendamento;
 import br.com.fatec.agendaflow.model.StatusAgendamento;
+import br.com.fatec.agendaflow.util.CalendarioMes;
 import br.com.fatec.agendaflow.util.Formatos;
 import br.com.fatec.agendaflow.util.Icones;
 import br.com.fatec.agendaflow.util.Janela;
@@ -20,8 +21,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 /** RF-14 e RF-15: todos os agendamentos, filtro por data e mudança de status. */
 public class AdminAgendaController {
@@ -39,8 +46,17 @@ public class AdminAgendaController {
     @FXML private TableColumn<Agendamento, String> colValor;
     @FXML private TableColumn<Agendamento, StatusAgendamento> colStatus;
     @FXML private TableColumn<Agendamento, Agendamento> colAcoes;
+    @FXML private HBox filtros;
+    @FXML private ToggleButton modoLista;
+    @FXML private ToggleButton modoCalendario;
+    @FXML private HBox visaoCalendario;
+    @FXML private StackPane lugarCalendario;
+    @FXML private Label tituloDia;
+    @FXML private VBox painelDia;
 
     private Janela janela;
+    private final CalendarioMes calendario = new CalendarioMes(
+            a -> a.getHoraInicio() + " " + a.getClienteNome().split(" ")[0]);
 
     public void iniciar(Janela janela) {
         this.janela = janela;
@@ -85,6 +101,20 @@ public class AdminAgendaController {
 
         filtroData.valueProperty().addListener((o, a, b) -> recarregar());
 
+        // visualização em calendário (mês inteiro + painel do dia clicado)
+        lugarCalendario.getChildren().add(calendario);
+        calendario.setAoSelecionar(this::mostrarDia);
+        ToggleGroup modos = new ToggleGroup();
+        modoLista.setToggleGroup(modos);
+        modoCalendario.setToggleGroup(modos);
+        modos.selectedToggleProperty().addListener((o, antigo, novo) -> {
+            if (novo == null) {
+                antigo.setSelected(true);
+            }
+        });
+        modoLista.setSelected(true);
+        filtros.managedProperty().bind(filtros.visibleProperty());
+
         // Observer: agendamento criado ou alterado em qualquer janela atualiza a tabela
         janela.ouvir((ag, anterior) -> {
             recarregar();
@@ -105,7 +135,59 @@ public class AdminAgendaController {
             String quando = filtro == null ? "no total" : "em " + Formatos.data(filtro);
             resumo.setText(lista.size() + (lista.size() == 1 ? " agendamento " : " agendamentos ") + quando
                     + " · " + abertos + " em aberto");
+
+            calendario.setAgendamentos(filtro == null ? lista : Sistema.AGENDAMENTOS.listarTodos(janela.getUsuario(), null));
+            mostrarDia(calendario.getSelecionado());
         });
+    }
+
+    @FXML
+    private void mostrarLista() {
+        tabela.setVisible(true);
+        visaoCalendario.setVisible(false);
+        filtros.setVisible(true);
+    }
+
+    @FXML
+    private void mostrarCalendario() {
+        tabela.setVisible(false);
+        visaoCalendario.setVisible(true);
+        filtros.setVisible(false);
+    }
+
+    /** Painel ao lado do calendário: os agendamentos do dia clicado, com as ações do RF-15. */
+    private void mostrarDia(LocalDate dia) {
+        tituloDia.setText(Formatos.dataLonga(dia));
+        painelDia.getChildren().clear();
+        List<Agendamento> doDia = calendario.doDia(dia);
+        if (doDia.isEmpty()) {
+            Label l = new Label("Nenhum agendamento neste dia.");
+            l.getStyleClass().add("texto-suave");
+            painelDia.getChildren().add(l);
+            return;
+        }
+        for (Agendamento a : doDia) {
+            Label hora = new Label(a.getHoraInicio() + " – " + a.getHoraFim());
+            hora.getStyleClass().add("subtitulo");
+            Region espaco = new Region();
+            HBox.setHgrow(espaco, Priority.ALWAYS);
+            HBox topo = new HBox(8, hora, espaco, ClienteAgendamentosController.status(a.getStatus()));
+            topo.setAlignment(Pos.CENTER_LEFT);
+            Label quem = new Label(a.getClienteNome() + " · " + a.getServicoNome());
+            quem.setWrapText(true);
+            Label prof = new Label("com " + a.getProfissionalNome() + " · " + Formatos.dinheiro(a.getValor()));
+            prof.getStyleClass().add("texto-suave");
+            VBox cartao = new VBox(6, topo, quem, prof);
+            cartao.getStyleClass().add("item-lista");
+            if (!a.getStatus().isFinalizado()) {
+                HBox acoes = new HBox(6,
+                        acao("check", "Marcar como concluído", "botao-sucesso", a, StatusAgendamento.CONCLUIDO),
+                        acao("falta", "Registrar falta do cliente", "botao-alerta", a, StatusAgendamento.FALTA),
+                        acao("x", "Cancelar agendamento", "botao-perigo", a, StatusAgendamento.CANCELADO));
+                cartao.getChildren().add(acoes);
+            }
+            painelDia.getChildren().add(cartao);
+        }
     }
 
     @FXML

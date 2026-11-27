@@ -63,11 +63,15 @@ final class Demonstracao {
         passo(() -> print("06-cliente-resumo"));
         passo(() -> clicarTexto(".botao-primario", "Confirmar agendamento"));
         passo(() -> print("07-cliente-agendamentos"));
+        passo(() -> clicarVisivel("modoCalendario"));
+        passo(() -> print("12-cliente-calendario"));
         passo(() -> clicarId("menuConta"));
         passo(() -> print("08-cliente-conta"));
         passo(() -> janela.sair());
         passo(() -> entrar("admin@agendaflow.com", "admin123"));
         passo(() -> print("09-admin-agendamentos"));
+        passo(() -> clicarVisivel("modoCalendario"));
+        passo(() -> print("13-admin-calendario"));
         passo(() -> clicarId("menuServicos"));
         passo(() -> print("10-admin-servicos"));
         passo(() -> clicarId("menuProfissionais"));
@@ -108,6 +112,25 @@ final class Demonstracao {
 
     private void clicarId(String id) {
         ((ButtonBase) cena().lookup("#" + id)).fire();
+    }
+
+    /** Clica no botão com esse id que estiver visível (há um por página). */
+    private void clicarVisivel(String id) {
+        for (Node n : cena().getRoot().lookupAll("#" + id)) {
+            if (n instanceof ButtonBase b && n.getScene() != null && visivel(n)) {
+                b.fire();
+                return;
+            }
+        }
+    }
+
+    private static boolean visivel(Node n) {
+        for (Node atual = n; atual != null; atual = atual.getParent()) {
+            if (!atual.isVisible()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void clicarTexto(String seletor, String texto) {

@@ -1,43 +1,43 @@
 /* =====================================================================
-   Agenda Flow — tema dark (tokens do nosso Guia de UI)
-   fundo #0B0B10 · superfície #16161F / #1D1D28 · texto #F2F2F5
-   destaque #6D5CFF (violeta) · destaque-2 #00C2FF (ciano)
+   Agenda Flow — tema dark masculino (grafite + azul)
+   fundo #0A0C10 · superfície #151A21 / #1B222B · texto #F1F4F8
+   destaque #3B82F6 (azul) · destaque-2 #00C2FF (ciano)
    ===================================================================== */
 
 .root {
-    -cor-fundo: #0B0B10;
-    -cor-fundo-2: #111118;
-    -cor-superficie: #16161F;
-    -cor-superficie-2: #1D1D28;
-    -cor-texto: #F2F2F5;
-    -cor-texto-2: #B4B4C0;
-    -cor-texto-3: #7A7A88;
+    -cor-fundo: #0A0C10;
+    -cor-fundo-2: #10141A;
+    -cor-superficie: #151A21;
+    -cor-superficie-2: #1B222B;
+    -cor-texto: #F1F4F8;
+    -cor-texto-2: #A9B3C1;
+    -cor-texto-3: #6F7A89;
     -cor-borda: rgba(255, 255, 255, 0.10);
     -cor-borda-forte: rgba(255, 255, 255, 0.16);
-    -cor-destaque: #6D5CFF;
-    -cor-destaque-hover: #7E6FFF;
-    -cor-destaque-suave: rgba(109, 92, 255, 0.16);
-    -cor-destaque-borda: rgba(109, 92, 255, 0.50);
-    -cor-destaque-claro: #A99BFF;
+    -cor-destaque: #3B82F6;
+    -cor-destaque-hover: #5B96F8;
+    -cor-destaque-suave: rgba(59, 130, 246, 0.16);
+    -cor-destaque-borda: rgba(59, 130, 246, 0.50);
+    -cor-destaque-claro: #93C5FD;
     -cor-destaque-2: #00C2FF;
     -cor-sucesso: #22C55E;
     -cor-alerta: #F59E0B;
     -cor-erro: #EF4444;
     -cor-preenchimento: rgba(255, 255, 255, 0.06);
     -cor-preenchimento-hover: rgba(255, 255, 255, 0.10);
-    -gradiente-destaque: linear-gradient(to right, #6D5CFF, #00C2FF);
+    -gradiente-destaque: linear-gradient(to right, #3B82F6, #00C2FF);
 
     -fx-font-family: "Segoe UI", system-ui, Roboto, sans-serif;
     -fx-font-size: 14px;
     -fx-text-fill: -cor-texto;
-    -fx-base: #16161F;
+    -fx-base: #151A21;
     -fx-background: transparent;
-    -fx-focus-color: #6D5CFF;
-    -fx-faint-focus-color: rgba(109, 92, 255, 0.18);
-    -fx-accent: #6D5CFF;
-    -fx-control-inner-background: #16161F;
-    -fx-selection-bar: rgba(109, 92, 255, 0.45);
-    -fx-selection-bar-non-focused: rgba(109, 92, 255, 0.30);
+    -fx-focus-color: #3B82F6;
+    -fx-faint-focus-color: rgba(59, 130, 246, 0.18);
+    -fx-accent: #3B82F6;
+    -fx-control-inner-background: #151A21;
+    -fx-selection-bar: rgba(59, 130, 246, 0.45);
+    -fx-selection-bar-non-focused: rgba(59, 130, 246, 0.30);
 }
 
 .janela { -fx-background-color: -cor-fundo; }
@@ -45,7 +45,7 @@
 /* luz bem discreta no fundo, só para o vidro não ficar chapado */
 .brilhos-fundo {
     -fx-background-color:
-        radial-gradient(center 8% 0%, radius 55%, rgba(109, 92, 255, 0.13), transparent),
+        radial-gradient(center 8% 0%, radius 55%, rgba(59, 130, 246, 0.13), transparent),
         radial-gradient(center 100% 100%, radius 50%, rgba(0, 194, 255, 0.07), transparent);
 }
 
@@ -57,7 +57,7 @@
 .vidro {
     -fx-background-color:
         linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.04)),
-        rgba(22, 22, 31, 0.78);
+        rgba(21, 26, 33, 0.78);
     -fx-background-insets: 0, 1;
     -fx-background-radius: 20, 19;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 48, 0.1, 0, 20);
@@ -131,7 +131,7 @@
     -fx-background-radius: 12, 12;
     -fx-border-color: rgba(255, 255, 255, 0.14);
     -fx-text-fill: white;
-    -fx-effect: dropshadow(gaussian, rgba(109, 92, 255, 0.35), 18, 0.05, 0, 6);
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.35), 18, 0.05, 0, 6);
 }
 .botao-primario:hover {
     -fx-background-color: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 60%), -cor-destaque-hover;
@@ -182,7 +182,7 @@
     -fx-border-radius: 12;
     -fx-text-fill: -cor-texto;
     -fx-prompt-text-fill: -cor-texto-3;
-    -fx-highlight-fill: rgba(109, 92, 255, 0.5);
+    -fx-highlight-fill: rgba(59, 130, 246, 0.5);
     -fx-padding: 10 12;
 }
 .text-field:hover, .password-field:hover, .combo-box-base:hover { -fx-border-color: -cor-borda-forte; }
@@ -345,7 +345,7 @@
 .menu-item:hover { -fx-background-color: -cor-preenchimento; -fx-text-fill: -cor-texto; }
 .menu-item:selected {
     -fx-background-color: -cor-destaque-suave;
-    -fx-border-color: rgba(109, 92, 255, 0.35);
+    -fx-border-color: rgba(59, 130, 246, 0.35);
     -fx-text-fill: white;
 }
 .menu-item:selected .icone { -fx-stroke: -cor-destaque-claro; }
@@ -365,7 +365,7 @@
 .recurso-icone {
     -fx-background-color: -cor-destaque-suave;
     -fx-background-radius: 12;
-    -fx-border-color: rgba(109, 92, 255, 0.3);
+    -fx-border-color: rgba(59, 130, 246, 0.3);
     -fx-border-radius: 12;
     -fx-min-width: 40; -fx-min-height: 40; -fx-max-width: 40; -fx-max-height: 40;
 }
@@ -420,9 +420,9 @@
     -fx-spacing: 8;
 }
 .cartao-opcao:hover {
-    -fx-background-color: -cor-destaque-borda, #22222F;
+    -fx-background-color: -cor-destaque-borda, #232B36;
     -fx-translate-y: -2;
-    -fx-effect: dropshadow(gaussian, rgba(109, 92, 255, 0.22), 24, 0.05, 0, 8);
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.22), 24, 0.05, 0, 8);
 }
 .cartao-opcao .icone { -fx-stroke: -cor-destaque-claro; }
 .cartao-icone {
@@ -451,7 +451,7 @@
     -fx-alignment: center;
     -fx-spacing: 1;
 }
-.dia:hover { -fx-background-color: -cor-borda-forte, #22222F; }
+.dia:hover { -fx-background-color: -cor-borda-forte, #232B36; }
 .dia-numero { -fx-font-size: 19px; -fx-font-weight: bold; }
 .dia-semana { -fx-text-fill: -cor-texto-3; -fx-font-size: 11.5px; -fx-font-weight: bold; }
 .dia-mes { -fx-text-fill: -cor-texto-3; -fx-font-size: 11px; }
@@ -516,7 +516,7 @@
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
-.status-agendado { -fx-background-color: rgba(109, 92, 255, 0.16); -fx-border-color: rgba(109, 92, 255, 0.5); -fx-text-fill: #C4BBFF; }
+.status-agendado { -fx-background-color: rgba(59, 130, 246, 0.16); -fx-border-color: rgba(59, 130, 246, 0.5); -fx-text-fill: #BFDBFE; }
 .status-concluido { -fx-background-color: rgba(34, 197, 94, 0.12); -fx-border-color: rgba(34, 197, 94, 0.45); -fx-text-fill: #86EFAC; }
 .status-cancelado { -fx-background-color: rgba(255, 255, 255, 0.05); -fx-border-color: rgba(255, 255, 255, 0.16); -fx-text-fill: -cor-texto-2; }
 .status-falta { -fx-background-color: rgba(245, 158, 11, 0.12); -fx-border-color: rgba(245, 158, 11, 0.45); -fx-text-fill: #FCD34D; }
@@ -554,3 +554,53 @@
 .dialogo-titulo { -fx-font-size: 19px; -fx-font-weight: bold; }
 
 .separador { -fx-background-color: -cor-borda; -fx-min-height: 1; -fx-max-height: 1; }
+
+/* ---------------------------------------------------------------- seletor Lista | Calendário */
+
+.segmentado {
+    -fx-background-color: -cor-fundo-2;
+    -fx-background-radius: 12;
+    -fx-border-color: -cor-borda;
+    -fx-border-radius: 12;
+    -fx-padding: 3;
+    -fx-spacing: 2;
+}
+.segmento {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 9;
+    -fx-padding: 7 14;
+    -fx-text-fill: -cor-texto-2;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.segmento:hover { -fx-text-fill: -cor-texto; }
+.segmento:selected { -fx-background-color: -cor-destaque; -fx-text-fill: white; }
+
+/* ---------------------------------------------------------------- calendário do mês */
+
+.cal-nome-dia { -fx-text-fill: -cor-texto-3; -fx-font-size: 11.5px; -fx-font-weight: bold; -fx-padding: 0 0 0 8; }
+.cal-dia {
+    -fx-background-color: -cor-borda, -cor-superficie-2;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 10, 9;
+    -fx-padding: 6;
+    -fx-cursor: hand;
+}
+.cal-dia:hover { -fx-background-color: -cor-borda-forte, #232B36; }
+.cal-dia-fora { -fx-opacity: 0.38; }
+.cal-dia-selecionado, .cal-dia-selecionado:hover { -fx-background-color: -cor-destaque, #1E2A3D; -fx-background-insets: 0, 1.5; }
+.cal-numero { -fx-font-weight: bold; -fx-font-size: 12.5px; -fx-text-fill: -cor-texto-2; -fx-padding: 1 6; }
+.cal-numero-hoje { -fx-background-color: -cor-destaque; -fx-background-radius: 999; -fx-text-fill: white; }
+.cal-evento {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 6;
+    -fx-background-radius: 5;
+    -fx-text-overrun: ellipsis;
+}
+.cal-evento-agendado { -fx-background-color: rgba(59, 130, 246, 0.22); -fx-text-fill: #BFDBFE; }
+.cal-evento-concluido { -fx-background-color: rgba(34, 197, 94, 0.18); -fx-text-fill: #86EFAC; }
+.cal-evento-cancelado { -fx-background-color: rgba(255, 255, 255, 0.06); -fx-text-fill: -cor-texto-3; -fx-strikethrough: true; }
+.cal-evento-falta { -fx-background-color: rgba(245, 158, 11, 0.18); -fx-text-fill: #FCD34D; }
+.cal-mais { -fx-font-size: 11px; -fx-text-fill: -cor-texto-3; -fx-padding: 0 4; }
