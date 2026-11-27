@@ -4,16 +4,16 @@
 |---|---|
 | **Versão do documento** | 2.0 |
 | **Data** | 27/11/2026 |
-| **Autor(es)** | Daniel Gomes |
+| **Autor(es)** | Daniel Gomes De Toledo e Gustavo Alesy F. Z. Tabú |
 | **Status** | Concluído |
-| **Aprovado por** | Daniel Gomes (autor do projeto) |
+| **Aprovado por** | Daniel Gomes De Toledo e Gustavo Alesy F. Z. Tabú (autores do projeto) |
 
 ## Histórico de Revisões
 
 | Versão | Data | Autor | Descrição da alteração |
 |---|---|---|---|
-| 1.0 | 28/08/2026 | Daniel Gomes | Criação do documento com o escopo fechado do MVP (requisitos, regras e casos de teste). |
-| 2.0 | 27/11/2026 | Daniel Gomes | Implementação completa como aplicação desktop JavaFX + SQLite, aplicação dos padrões GoF Factory, Observer e Strategy, inclusão da RN-11, testes JUnit (66 testes aprovados) e executável Windows. Documento reorganizado no modelo "Versão 2 Final". |
+| 1.0 | 28/08/2026 | Daniel Gomes De Toledo e Gustavo Alesy F. Z. Tabú | Criação do documento com o escopo fechado do MVP (requisitos, regras e casos de teste). |
+| 2.0 | 27/11/2026 | Daniel Gomes De Toledo e Gustavo Alesy F. Z. Tabú | Implementação completa como aplicação desktop JavaFX + SQLite, aplicação dos padrões GoF Factory, Observer e Strategy, inclusão da RN-11, testes JUnit (66 testes aprovados) e executável Windows. Documento reorganizado no modelo "Versão 2 Final". |
 
 ---
 
@@ -36,7 +36,7 @@
 
 ### 1.1 Propósito do documento
 
-Este documento define, de forma única, fechada e completa, o escopo da primeira versão (MVP) do **Agenda Flow — Sistema de Agendamento para Salões de Beleza**, e registra como ele foi construído. Ele serve ao mesmo tempo como especificação funcional, especificação técnica, plano de testes e matriz de rastreabilidade, sendo a única fonte de verdade do projeto. Destina-se ao desenvolvedor (autor e responsável pela implementação) e a quem for avaliar o projeto (professora/banca).
+Este documento define, de forma única, fechada e completa, o escopo da primeira versão (MVP) do **Agenda Flow — Sistema de Agendamento para Salões de Beleza**, e registra como ele foi construído. Ele serve ao mesmo tempo como especificação funcional, especificação técnica, plano de testes e matriz de rastreabilidade, sendo a única fonte de verdade do projeto. Destina-se aos desenvolvedores (autores e responsáveis pela implementação) e a quem for avaliar o projeto (professora/banca).
 
 Tudo o que está listado neste documento é necessário e suficiente para considerar o projeto 100% concluído. Nada aqui foi adiado, e nada além disto foi implementado nesta versão.
 
@@ -50,10 +50,10 @@ O problema resolvido é o controle centralizado da agenda de um estabelecimento 
 
 | Nome / Papel | Responsabilidade | Contato |
 |---|---|---|
-| Product Owner | Definição de escopo e prioridades | Daniel Gomes |
-| Arquiteto de Software | Definição da arquitetura em camadas e dos padrões GoF | Daniel Gomes |
-| Time de Desenvolvimento | Implementação do sistema (Java/JavaFX) | Daniel Gomes |
-| Time de QA | Execução dos casos de teste da Seção 7 (JUnit + roteiro manual) | Daniel Gomes |
+| Product Owner | Definição de escopo e prioridades | Daniel Gomes De Toledo e Gustavo Alesy F. Z. Tabú |
+| Arquiteto de Software | Definição da arquitetura em camadas e dos padrões GoF | Daniel Gomes De Toledo e Gustavo Alesy F. Z. Tabú |
+| Time de Desenvolvimento | Implementação do sistema (Java/JavaFX) | Daniel Gomes De Toledo e Gustavo Alesy F. Z. Tabú |
+| Time de QA | Execução dos casos de teste da Seção 7 (JUnit + roteiro manual) | Daniel Gomes De Toledo e Gustavo Alesy F. Z. Tabú |
 | Cliente / Patrocinador | Avaliação da entrega conforme os critérios da disciplina | Professora de Engenharia de Software III (Fatec) |
 
 ---
@@ -154,21 +154,21 @@ Os itens abaixo **não fazem parte desta versão**:
 
 | ID | Descrição | Prioridade | Origem / Solicitante | Status |
 |---|---|---|---|---|
-| RF-01 | O sistema deve permitir o cadastro de um novo usuário (cliente), informando nome, e-mail e senha. | Alta | Autor do projeto | Implementado |
-| RF-02 | O sistema deve permitir que um usuário (cliente ou admin) se autentique com e-mail e senha. | Alta | Autor do projeto | Implementado |
-| RF-03 | O sistema deve permitir que o ADMIN cadastre, edite e ative/inative um serviço (nome, descrição, duração em minutos, valor). | Alta | Autor do projeto | Implementado |
-| RF-04 | O sistema deve permitir que o ADMIN cadastre, edite e ative/inative um profissional (nome). | Alta | Autor do projeto | Implementado |
-| RF-05 | O sistema deve permitir que o ADMIN vincule e desvincule serviços a um profissional. | Alta | Autor do projeto | Implementado |
-| RF-06 | O sistema deve permitir que o ADMIN cadastre o horário de trabalho semanal de um profissional (dia da semana, hora início, hora fim). | Alta | Autor do projeto | Implementado |
-| RF-07 | O sistema deve listar, para o cliente, apenas os serviços com status ativo. | Alta | Autor do projeto | Implementado |
-| RF-08 | O sistema deve listar, para um serviço escolhido, apenas os profissionais ativos vinculados a ele. | Alta | Autor do projeto | Implementado |
-| RF-09 | O sistema deve calcular e exibir, para um profissional, serviço e data escolhidos, apenas os horários de início realmente disponíveis. | Alta | Autor do projeto | Implementado |
-| RF-10 | O sistema deve permitir que o cliente crie um agendamento somente após confirmar um resumo com serviço, profissional, data, horário e valor. | Alta | Autor do projeto | Implementado |
-| RF-11 | O sistema deve impedir a criação de um agendamento em um horário que já esteja ocupado, indisponível ou insuficiente para a duração do serviço. | Alta | Autor do projeto | Implementado |
-| RF-12 | O sistema deve listar os agendamentos do cliente autenticado, com seus respectivos status, em lista ou em calendário mensal. | Alta | Autor do projeto | Implementado |
-| RF-13 | O sistema deve permitir que o cliente cancele um agendamento próprio enquanto o status for "Agendado". | Alta | Autor do projeto | Implementado |
-| RF-14 | O sistema deve permitir que o ADMIN liste todos os agendamentos do sistema, com filtro por data, em lista ou em calendário mensal. | Alta | Autor do projeto | Implementado |
-| RF-15 | O sistema deve permitir que o ADMIN altere o status de um agendamento para "Concluído", "Cancelado" ou "Falta do cliente". | Alta | Autor do projeto | Implementado |
+| RF-01 | O sistema deve permitir o cadastro de um novo usuário (cliente), informando nome, e-mail e senha. | Alta | Autores do projeto | Implementado |
+| RF-02 | O sistema deve permitir que um usuário (cliente ou admin) se autentique com e-mail e senha. | Alta | Autores do projeto | Implementado |
+| RF-03 | O sistema deve permitir que o ADMIN cadastre, edite e ative/inative um serviço (nome, descrição, duração em minutos, valor). | Alta | Autores do projeto | Implementado |
+| RF-04 | O sistema deve permitir que o ADMIN cadastre, edite e ative/inative um profissional (nome). | Alta | Autores do projeto | Implementado |
+| RF-05 | O sistema deve permitir que o ADMIN vincule e desvincule serviços a um profissional. | Alta | Autores do projeto | Implementado |
+| RF-06 | O sistema deve permitir que o ADMIN cadastre o horário de trabalho semanal de um profissional (dia da semana, hora início, hora fim). | Alta | Autores do projeto | Implementado |
+| RF-07 | O sistema deve listar, para o cliente, apenas os serviços com status ativo. | Alta | Autores do projeto | Implementado |
+| RF-08 | O sistema deve listar, para um serviço escolhido, apenas os profissionais ativos vinculados a ele. | Alta | Autores do projeto | Implementado |
+| RF-09 | O sistema deve calcular e exibir, para um profissional, serviço e data escolhidos, apenas os horários de início realmente disponíveis. | Alta | Autores do projeto | Implementado |
+| RF-10 | O sistema deve permitir que o cliente crie um agendamento somente após confirmar um resumo com serviço, profissional, data, horário e valor. | Alta | Autores do projeto | Implementado |
+| RF-11 | O sistema deve impedir a criação de um agendamento em um horário que já esteja ocupado, indisponível ou insuficiente para a duração do serviço. | Alta | Autores do projeto | Implementado |
+| RF-12 | O sistema deve listar os agendamentos do cliente autenticado, com seus respectivos status, em lista ou em calendário mensal. | Alta | Autores do projeto | Implementado |
+| RF-13 | O sistema deve permitir que o cliente cancele um agendamento próprio enquanto o status for "Agendado". | Alta | Autores do projeto | Implementado |
+| RF-14 | O sistema deve permitir que o ADMIN liste todos os agendamentos do sistema, com filtro por data, em lista ou em calendário mensal. | Alta | Autores do projeto | Implementado |
+| RF-15 | O sistema deve permitir que o ADMIN altere o status de um agendamento para "Concluído", "Cancelado" ou "Falta do cliente". | Alta | Autores do projeto | Implementado |
 
 ### 3.2 Detalhamento dos Requisitos Funcionais
 
@@ -463,17 +463,17 @@ Os itens abaixo **não fazem parte desta versão**:
 
 | ID | Descrição | Origem | Requisitos relacionados |
 |---|---|---|---|
-| RN-01 | A senha do usuário deve ter no mínimo 8 caracteres, contendo letras e números. | Autor do projeto | RF-01 |
-| RN-02 | Não pode existir mais de um usuário com o mesmo e-mail (sem diferenciar maiúsculas e minúsculas). | Autor do projeto | RF-01 |
-| RN-03 | Um usuário só pode visualizar e alterar os próprios dados e os próprios agendamentos, salvo o ADMIN, que visualiza todos os agendamentos. | Autor do projeto | RF-02, RF-12, RF-13, RF-14 |
-| RN-04 | A duração de um serviço deve ser maior que 0 minutos e o valor deve ser maior ou igual a 0. | Autor do projeto | RF-03 |
-| RN-05 | Para um mesmo profissional e dia da semana, os intervalos de horário de trabalho cadastrados não podem se sobrepor. | Autor do projeto | RF-06 |
-| RN-06 | Um agendamento só pode ser criado se o intervalo completo (horário de início + duração do serviço) estiver contido no horário de trabalho do profissional e não se sobrepuser a nenhum outro agendamento ativo (status "Agendado" ou "Concluído") do mesmo profissional. | Autor do projeto | RF-09, RF-10, RF-11 |
-| RN-07 | Agendamentos com status "Cancelado" não bloqueiam horários — o horário correspondente volta a ficar disponível. | Autor do projeto | RF-09, RF-13 |
-| RN-08 | Um agendamento só pode ter seu status alterado (concluído, cancelado, falta) enquanto estiver no status "Agendado". Uma vez finalizado, o status não pode ser alterado novamente. | Autor do projeto | RF-13, RF-15 |
-| RN-09 | Apenas usuários com papel ADMIN podem cadastrar/editar serviços, profissionais, vínculos e horários de trabalho, e podem alterar o status de qualquer agendamento. | Autor do projeto | RF-03, RF-04, RF-05, RF-06, RF-15 |
-| RN-10 | Um serviço só pode ser selecionado pelo cliente para agendamento se estiver com status ativo. Um profissional só pode ser selecionado se estiver ativo e vinculado ao serviço escolhido. | Autor do projeto | RF-07, RF-08, RF-10 |
-| RN-11 | **Desconto fidelidade:** o cliente com 3 ou mais atendimentos concluídos ganha 10% de desconto no valor do serviço. O valor é mostrado no resumo (RF-10) e gravado no agendamento. Implementada com o padrão Strategy (Seção 6.9). | Autor do projeto (versão 2.0) | RF-10 |
+| RN-01 | A senha do usuário deve ter no mínimo 8 caracteres, contendo letras e números. | Autores do projeto | RF-01 |
+| RN-02 | Não pode existir mais de um usuário com o mesmo e-mail (sem diferenciar maiúsculas e minúsculas). | Autores do projeto | RF-01 |
+| RN-03 | Um usuário só pode visualizar e alterar os próprios dados e os próprios agendamentos, salvo o ADMIN, que visualiza todos os agendamentos. | Autores do projeto | RF-02, RF-12, RF-13, RF-14 |
+| RN-04 | A duração de um serviço deve ser maior que 0 minutos e o valor deve ser maior ou igual a 0. | Autores do projeto | RF-03 |
+| RN-05 | Para um mesmo profissional e dia da semana, os intervalos de horário de trabalho cadastrados não podem se sobrepor. | Autores do projeto | RF-06 |
+| RN-06 | Um agendamento só pode ser criado se o intervalo completo (horário de início + duração do serviço) estiver contido no horário de trabalho do profissional e não se sobrepuser a nenhum outro agendamento ativo (status "Agendado" ou "Concluído") do mesmo profissional. | Autores do projeto | RF-09, RF-10, RF-11 |
+| RN-07 | Agendamentos com status "Cancelado" não bloqueiam horários — o horário correspondente volta a ficar disponível. | Autores do projeto | RF-09, RF-13 |
+| RN-08 | Um agendamento só pode ter seu status alterado (concluído, cancelado, falta) enquanto estiver no status "Agendado". Uma vez finalizado, o status não pode ser alterado novamente. | Autores do projeto | RF-13, RF-15 |
+| RN-09 | Apenas usuários com papel ADMIN podem cadastrar/editar serviços, profissionais, vínculos e horários de trabalho, e podem alterar o status de qualquer agendamento. | Autores do projeto | RF-03, RF-04, RF-05, RF-06, RF-15 |
+| RN-10 | Um serviço só pode ser selecionado pelo cliente para agendamento se estiver com status ativo. Um profissional só pode ser selecionado se estiver ativo e vinculado ao serviço escolhido. | Autores do projeto | RF-07, RF-08, RF-10 |
+| RN-11 | **Desconto fidelidade:** o cliente com 3 ou mais atendimentos concluídos ganha 10% de desconto no valor do serviço. O valor é mostrado no resumo (RF-10) e gravado no agendamento. Implementada com o padrão Strategy (Seção 6.9). | Autores do projeto (versão 2.0) | RF-10 |
 
 ---
 
