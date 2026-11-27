@@ -21,12 +21,19 @@
 
 ---
 
-## ⬇️ Como abrir (sem instalar nada)
+## ⬇️ Como instalar (Windows)
 
-1. Baixe **`AgendaFlow-windows.zip`** em [**Releases**](../../releases/latest).
-2. Extraia o zip e abra **`AgendaFlow\AgendaFlow.exe`**.
+<p>
+  <a href="../../releases/latest/download/AgendaFlow-1.0.0.exe"><img alt="Baixar o instalador" src="https://img.shields.io/badge/Baixar-AgendaFlow--1.0.0.exe-3B82F6?style=for-the-badge&logo=windows&logoColor=white"></a>
+</p>
 
-O Java e o banco de dados já vão **dentro** do executável. O banco (SQLite) nasce sozinho no primeiro uso, já com dados de demonstração, em `%APPDATA%\AgendaFlow\`.
+1. Baixe o instalador **`AgendaFlow-1.0.0.exe`** (botão acima ou em [**Releases**](../../releases/latest)).
+2. Abra e avance. Não pede administrador e cria atalho na Área de Trabalho e no Menu Iniciar.
+3. Abra o **AgendaFlow**.
+
+> Se aparecer "O Windows protegeu o computador", clique em **Mais informações → Executar assim mesmo** (o instalador não tem assinatura digital paga).
+
+O Java e o banco de dados já vão **dentro** do instalador: não precisa instalar mais nada. O banco (SQLite) nasce sozinho no primeiro uso, já com dados de demonstração, em `%APPDATA%\AgendaFlow\`.
 
 | Perfil | E-mail | Senha |
 |---|---|---|
@@ -148,11 +155,12 @@ mvn test                # roda os 66 testes
 mvn package             # gera target/agenda-flow.jar (tudo em um)
 ```
 
-Gerar o executável do Windows (com o Java embutido):
+Gerar o instalador do Windows (com o Java embutido; precisa do [WiX Toolset 3](https://github.com/wixtoolset/wix3/releases) no PATH):
 
 ```bash
-jpackage --type app-image --name AgendaFlow --input target --main-jar agenda-flow.jar ^
+jpackage --type exe --name AgendaFlow --app-version 1.0.0 --input target --main-jar agenda-flow.jar ^
   --main-class br.com.fatec.agendaflow.Launcher --icon packaging/icone.ico --dest dist ^
+  --win-shortcut --win-menu --win-menu-group "Agenda Flow" --win-dir-chooser --win-per-user-install ^
   --add-modules java.base,java.desktop,java.logging,java.naming,java.sql,java.xml,java.scripting,java.management,jdk.unsupported,jdk.charsets,jdk.localedata,jdk.crypto.ec
 ```
 

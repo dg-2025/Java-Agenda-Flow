@@ -136,7 +136,7 @@ Os itens abaixo **não fazem parte desta versão**:
 ### 2.7 Entregáveis
 
 - Código-fonte completo da aplicação (repositório GitHub), organizado conforme a Seção 6.11.
-- Executável Windows (`AgendaFlow.exe`, com Java embutido) e o `agenda-flow.jar` (jar único).
+- Instalador Windows (`AgendaFlow-1.0.0.exe`, com Java embutido, publicado no Release) e o `agenda-flow.jar` (jar único).
 - Script do banco (`db/agendaflow.sql`); o mesmo esquema é criado automaticamente pela aplicação.
 - Suíte de testes automatizados JUnit 5 (66 testes, todos aprovados).
 - `README.md` (apresentação, prints e como executar) e este documento (`DOCUMENTACAO.md`).
@@ -1334,7 +1334,7 @@ Java-Agenda-Flow/
 |---|---|---|
 | Desenvolvimento | Codificação e execução pela IDE (NetBeans ou VS Code) | `mvn javafx:run`; banco em `%APPDATA%\AgendaFlow\agendaflow.db` |
 | Testes (QA) | Testes automatizados JUnit | `mvn test`; cada teste usa um SQLite temporário (`@TempDir`) |
-| Produção / entrega | Uso e avaliação no Windows | Executável `AgendaFlow.exe` (Java embutido) ou `java -jar agenda-flow.jar`; logins de demonstração na Seção 2.4 |
+| Produção / entrega | Uso e avaliação no Windows | Instalador `AgendaFlow-1.0.0.exe` no Release (Java embutido) ou `java -jar agenda-flow.jar`; logins de demonstração na Seção 2.4 |
 
 ### Convenção de ID
 `CT-XX` (Caso de Teste número XX)
